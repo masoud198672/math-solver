@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>حل‌کن ریاضی</title>
+       <style>
+        body {
+            font-family: Tahoma, sans-serif;
+            background-color: #f0f4f8;
+            max-width: 600px;
+            margin: 40px auto;
+            padding: 0 16px;
+        }
+        h1 {
+            color: #1f4e79;
+            margin-bottom: 24px;
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 15px;
+        }
+        form {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 24px;
+        }
+        input {
+            flex: 1;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #999;
+            border-radius: 6px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #1f4e79;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #163a5c;
+        }
+        .box {
+            background-color: white;
+            border-radius: 8px;
+            padding: 16px 20px;
+            margin-bottom: 16px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        .box h3 {
+            margin-top: 0;
+            color: #1f4e79;
+        }
+        .box ol {
+            padding-right: 20px;
+            padding-left: 0;
+            margin: 0;
+        }
+        .box li {
+            margin-bottom: 10px;
+            line-height: 1.7;
+        }
+        .error {
+            color: #b3261e;
+            background-color: #fdecea;
+            padding: 12px 16px;
+            border-radius: 8px;
+        }
+    </style>
+</head>
+<body>
+    <h1>حل‌کن ریاضی</h1>
+
+    <form method="post">
+        <input type="text" name="equation" value="{{ equation_text }}" dir="ltr" size="40">
+        <button type="submit">حل کن</button>
+    </form>
+
+    {% if result is not none %}
+        <div class="box">
+            <p>جواب: {{ result }}</p>
+        </div>
+    {% endif %}
+
+    {% if steps %}
+        <div class="box">
+            <h3>مراحل حل:</h3>
+            <ol>
+                {% for text, math in steps %}
+                    <li>{{ text }} <span dir="ltr">{{ math }}</span></li>
+                {% endfor %}
+            </ol>
+        </div>
+    {% endif %}
+
+    {% if error %}
+        <p class="error">{{ error }}</p>
+    {% endif %}
+</body>
+</html>
